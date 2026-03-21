@@ -1,0 +1,37 @@
+version:  '3.7'
+
+services:
+  db:
+    image: mysql:8.0
+    container_name: clinic_db
+    environment:
+      MYSQL_DATABASE: clinic_db
+      MYSQL_ROOT_PASSWORD: p@ssw0rd
+    ports:
+      - 3306:3306
+    volumes:
+      - web_clinic:/var/lib/mysql
+    networks:
+      - project101
+    
+  phpmyadmin:
+    image: phpmyadmin:latest
+    container_name: phpmyadmin
+    environment:
+      PMA_HOST: db
+      PMA_USER: root
+      PMA_PASSWORD: p@ssw0rd
+    ports:
+      - "8701:80"
+    depends_on:
+      - db
+    networks:
+      - project101
+
+networks:
+  project101:
+    driver: bridge
+    
+volumes:
+  web_clinic:
+    driver: local
