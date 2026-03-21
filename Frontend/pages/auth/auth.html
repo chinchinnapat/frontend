@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ยืนยันตัวตน - Wellcare Clinic</title>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary: #1a73e8;
+            --dark: #0d47a1;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Kanit', sans-serif;
+        }
+
+        body {
+            /* ใช้ Gradient เพื่อความหรูหรา */
+            background: linear-gradient(135deg, #f0f7ff 0%, #e2e8f0 100%);
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .auth-card {
+            background: white;
+            padding: 50px 40px;
+            border-radius: 30px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 480px;
+            width: 100%;
+            transition: transform 0.3s ease;
+        }
+
+        .auth-icon-box {
+            background: #f0f7ff;
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 25px;
+            color: var(--primary);
+            font-size: 2.8rem;
+        }
+
+        h2 {
+            color: var(--dark);
+            font-size: 1.8rem;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+
+        p {
+            color: #64748b;
+            line-height: 1.6;
+            margin-bottom: 35px;
+            font-size: 1.05rem;
+        }
+
+        .auth-btns {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        /* ตกแต่งปุ่มให้ดูสมมาตร */
+        .btn {
+            padding: 16px 20px;
+            border-radius: 16px;
+            text-decoration: none;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            transition: all 0.3s ease;
+            font-size: 1.1rem;
+        }
+
+        .btn-login {
+            background: var(--primary);
+            color: white;
+            box-shadow: 0 4px 6px -1px rgba(26, 115, 232, 0.2);
+        }
+
+        .btn-login:hover {
+            background: var(--dark);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(26, 115, 232, 0.3);
+        }
+
+        .btn-register {
+            background: white;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-register:hover {
+            background: #f8fbff;
+            transform: translateY(-2px);
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 30px;
+            color: #94a3b8;
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: 0.3s;
+        }
+
+        .back-link:hover {
+            color: var(--primary);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="auth-card">
+        <div class="auth-icon-box">
+            <i class="fas fa-user-shield"></i>
+        </div>
+        <h2>ยืนยันตัวตน</h2>
+        <p>เพื่อความปลอดภัยของข้อมูลสุขภาพ <br>กรุณาเลือกสถานะเพื่อดำเนินการต่อครับ</p>
+        
+        <div class="auth-btns">
+            <a href="/pages/login/login.html" class="btn btn-login">
+                <i class="fas fa-sign-in-alt"></i> มีบัญชีผู้ใช้แล้ว
+            </a>
+            <a href="/pages/register/register.html" class="btn btn-register">
+                <i class="fas fa-user-plus"></i> ยังไม่มีบัญชี (สมัครสมาชิก)
+            </a>
+        </div>
+        
+        <a href="../../index.html" class="back-link">
+            <i class="fas fa-arrow-left"></i> กลับสู่หน้าหลัก
+        </a>
+    </div>
+
+</body>
+</html>

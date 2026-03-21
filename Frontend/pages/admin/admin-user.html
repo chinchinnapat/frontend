@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Wellcare Admin - Manage Users</title>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --sidebar-bg: #1e293b;
+            --accent: #3b82f6;
+            --bg: #f1f5f9;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Kanit', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg);
+            display: flex;
+        }
+
+        .sidebar {
+            width: 260px;
+            background: var(--sidebar-bg);
+            color: white;
+            padding: 30px 15px;
+            position: fixed;
+            height: 100vh;
+        }
+
+        .sidebar h2 {
+            color: var(--accent);
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px 15px;
+            color: #94a3b8;
+            text-decoration: none;
+            border-radius: 10px;
+            margin-bottom: 5px;
+            transition: 0.3s;
+        }
+
+        .nav-item:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+
+        .nav-item.active {
+            background: var(--accent);
+            color: white;
+        }
+
+        .main-content {
+            margin-left: 260px;
+            flex-grow: 1;
+            padding: 40px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .search-box {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            outline: none;
+        }
+
+        .search-box:focus {
+            border-color: var(--accent);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            text-align: left;
+            color: #64748b;
+            font-weight: 500;
+            border-bottom: 2px solid #f1f5f9;
+            padding: 15px;
+        }
+    </style>
+</head>
+
+<body>
+    <aside class="sidebar">
+        <h2>Wellcare Admin</h2>
+        <nav>
+            <a href="admin-dashboard.html" class="nav-item"><i class="fas fa-chart-pie"></i> ภาพรวมระบบ</a>
+            <a href="admin-user.html" class="nav-item active"><i class="fas fa-users-cog"></i> จัดการผู้ใช้งาน</a>
+            <a href="admin-doctor.html" class="nav-item"><i class="fas fa-hospital-user"></i> รายชื่อหมอ/พยาบาล</a>
+        </nav>
+    </aside>
+
+    <main class="main-content">
+        <header style="margin-bottom: 30px;">
+            <h1>จัดการผู้ใช้งานในระบบ</h1>
+            <p style="color: #64748b;">ดูรายชื่อ แก้ไขข้อมูล หรือจัดการสิทธิ์การเข้าถึง</p>
+        </header>
+
+        <div class="card">
+            <input type="text" id="userSearchInput" class="search-box"
+                placeholder="ค้นหาด้วยชื่อผู้ใช้ หรือ เลขบัตรประชาชน...">
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Username (ID Card)</th>
+                        <th>Role</th>
+                        <th>Patient ID Reference</th>
+                        <th>สถานะ</th> <th>จัดการ</th>
+                    </tr>
+                </thead>
+                <tbody id="userTableBody">
+                    </tbody>
+            </table>
+        </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="../../js/api.js"></script> 
+    <script src="admin-user.js"></script>
+</body>
+
+</html>

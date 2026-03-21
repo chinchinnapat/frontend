@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>รายละเอียดการรักษา - Wellcare Clinic</title>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #1a73e8;
+            --dark-blue: #0d47a1;
+            --bg-light: #f8fbff;
+            --white: #ffffff;
+            --text-main: #334155;
+            --text-sub: #64748b;
+            --border: #e2e8f0;
+            --success: #22c55e;
+            --warning-bg: #fffbeb;
+            --warning-border: #f59e0b;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Kanit', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-main);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .main-content {
+            max-width: 850px;
+            margin: 0 auto;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        header h1 {
+            font-size: 1.8rem;
+            color: var(--dark-blue);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        /* ปุ่มย้อนกลับ */
+        .btn-back {
+            background: var(--white);
+            border: 1px solid var(--border);
+            padding: 10px 20px;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: 0.3s;
+            color: var(--text-sub);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 500;
+        }
+
+        .btn-back:hover {
+            background: #f1f5f9;
+            color: var(--primary);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+
+        /* การ์ดรายละเอียดหลัก */
+        .card {
+            background: var(--white);
+            padding: 40px;
+            border-radius: 28px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.05);
+            border: 1px solid var(--border);
+            position: relative;
+        }
+
+        .card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 8px;
+            background: linear-gradient(90deg, var(--primary), var(--dark-blue));
+            border-radius: 28px 28px 0 0;
+        }
+
+        /* ส่วนหัวของใบสรุป */
+        .record-header {
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 2px dashed var(--border);
+            padding-bottom: 25px;
+            margin-bottom: 30px;
+        }
+
+        .clinic-info img {
+            width: 150px;
+            margin-bottom: 10px;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            background: #f8fafc;
+            padding: 20px;
+            border-radius: 16px;
+            margin-bottom: 30px;
+        }
+
+        .info-item label {
+            display: block;
+            font-size: 0.85rem;
+            color: var(--text-sub);
+            margin-bottom: 4px;
+        }
+
+        .info-item p {
+            font-weight: 600;
+            color: var(--text-main);
+        }
+
+        /* ส่วนเนื้อหาการตรวจ */
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--primary);
+            font-size: 1.25rem;
+            margin-bottom: 15px;
+            margin-top: 25px;
+        }
+
+        .content-box {
+            padding: 15px 20px;
+            border-left: 4px solid var(--primary);
+            background: #f0f7ff;
+            border-radius: 0 12px 12px 0;
+            margin-bottom: 20px;
+        }
+
+        /* โซนใบสั่งยา */
+        .prescription-container {
+            background: var(--warning-bg);
+            border: 1px dashed var(--warning-border);
+            padding: 25px;
+            border-radius: 20px;
+            margin-top: 30px;
+        }
+
+        .prescription-container h3 {
+            color: #b45309;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        pre {
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            color: #4b5563;
+            font-size: 1.05rem;
+            line-height: 1.8;
+            background: rgba(255,255,255,0.5);
+            padding: 15px;
+            border-radius: 12px;
+        }
+
+        .print-btn {
+            margin-top: 30px;
+            width: 100%;
+            padding: 15px;
+            background: var(--dark-blue);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .print-btn:hover {
+            background: var(--primary);
+        }
+
+        @media print {
+            .btn-back, .print-btn { display: none; }
+            body { padding: 0; background: white; }
+            .card { box-shadow: none; border: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="main-content">
+        <header>
+            <h1><i class="fas fa-file-invoice-medical"></i> ข้อมูลการรักษา</h1>
+            <a href="javascript:window.history.back()" class="btn-back">
+                <i class="fas fa-arrow-left"></i> ย้อนกลับ
+            </a>
+        </header>
+
+        <div class="card" id="record-content">
+            <div style="text-align: center; padding: 50px;">
+                <i class="fas fa-spinner fa-spin fa-2x" style="color: var(--primary);"></i>
+                <p style="margin-top: 15px; color: var(--text-sub);">กำลังดึงข้อมูลใบสรุปการรักษา...</p>
+            </div>
+        </div>
+
+        <button class="print-btn" onclick="window.print()">
+            <i class="fas fa-print"></i> พิมพ์เอกสาร / บันทึกเป็น PDF
+        </button>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="../../js/api.js"></script>
+    <script src="medical-record.js"></script>
+</body>
+</html>

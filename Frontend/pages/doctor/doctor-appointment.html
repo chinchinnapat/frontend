@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>การนัดหมาย - Wellcare Staff</title>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root { --staff-primary: #0d47a1; --staff-bg: #f0f4f8; --white: #ffffff; --border: #d1d9e6; --text-main: #334155; --text-sub: #64748b; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Kanit', sans-serif; }
+        body { background-color: var(--staff-bg); display: flex; min-height: 100vh; }
+        .sidebar { width: 260px; background: var(--staff-primary); color: white; padding: 30px 15px; display: flex; flex-direction: column; position: fixed; height: 100vh; }
+        .sidebar h2 { font-size: 1.4rem; margin-bottom: 30px; text-align: center; }
+        .nav-item { padding: 14px 15px; color: rgba(255,255,255,0.8); text-decoration: none; border-radius: 10px; margin-bottom: 8px; display: flex; align-items: center; gap: 12px; transition: 0.3s; }
+        .nav-item:hover, .nav-item.active { background: rgba(255,255,255,0.15); color: white; }
+        .nav-item.logout { margin-top: auto; color: #ffab91; cursor: pointer; border: none; background: none; width: 100%; font-size: 1rem; }
+        .main-content { margin-left: 260px; flex-grow: 1; padding: 40px; }
+        .card { background: var(--white); padding: 30px; border-radius: 15px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); margin-bottom: 25px; }
+        .card-title { font-weight: 600; margin-bottom: 20px; color: var(--staff-primary); display: flex; align-items: center; gap: 10px; border-bottom: 2px solid #f0f0f0; padding-bottom: 10px; }
+        table { width: 100%; border-collapse: collapse; }
+        th, td { padding: 14px 12px; text-align: left; border-bottom: 1px solid #eee; font-size: 0.95rem; }
+        th { color: var(--text-sub); font-weight: 600; background: #f8fafc; }
+        tr:hover td { background: #f0f7ff; }
+        .badge { padding: 4px 12px; border-radius: 20px; font-size: 0.82rem; font-weight: 600; }
+        .badge-confirmed { background: #e8f5e9; color: #2e7d32; }
+        .badge-pending { background: #fff3e0; color: #e65100; }
+        .badge-completed { background: #e3f2fd; color: #1565c0; }
+        .badge-cancelled { background: #fce4ec; color: #c62828; }
+        .empty-state { text-align: center; padding: 40px; color: var(--text-sub); }
+        .header-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; }
+        .doctor-name { font-weight: 600; color: var(--staff-primary); font-size: 0.95rem; }
+        .refresh-hint { font-size: 0.8rem; color: var(--text-sub); margin-left: auto; font-weight: 400; }
+    </style>
+</head>
+<body>
+    <aside class="sidebar">
+        <h2>Wellcare Staff</h2>
+        <nav>
+            <a href="doctor-manage.html" class="nav-item"><i class="fas fa-user-edit"></i> จัดการการรักษา</a>
+            <a href="doctor-appointment.html" class="nav-item active"><i class="fas fa-calendar-plus"></i> การนัดหมาย</a>
+            <a href="doctor-visit.html" class="nav-item"><i class="fas fa-user-check"></i> Check-in คนไข้</a>
+        </nav>
+        <a onclick="logout()" class="nav-item logout"><i class="fas fa-sign-out-alt"></i> ออกจากระบบ</a>
+    </aside>
+
+    <main class="main-content">
+        <div class="header-row">
+            <div>
+                <h1>การนัดหมาย</h1>
+                <p style="color: var(--text-sub);">รายการนัดหมายคนไข้ทั้งหมดของคุณ</p>
+            </div>
+            <div class="doctor-name">
+                <i class="fas fa-user-circle"></i>
+                <span id="doctor_fullname">กำลังโหลด...</span>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-title">
+                <i class="fas fa-calendar-check"></i> รายการนัดหมาย
+                <span class="refresh-hint" id="last_updated"></span>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>วันที่</th>
+                        <th>เวลา</th>
+                        <th>ชื่อคนไข้</th>
+                        <th>สาเหตุที่นัด</th>
+                        <th>สถานะ</th>
+                    </tr>
+                </thead>
+                <tbody id="appointment_tbody">
+                    <tr><td colspan="5" class="empty-state">กำลังโหลด...</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="../../js/api.js"></script>
+    <script src="doctor-appointment.js"></script>
+</body>
+</html>

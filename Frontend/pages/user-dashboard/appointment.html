@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>นัดหมายของฉัน - Wellcare Clinic</title>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #1a73e8;
+            --sidebar-bg: #ffffff;
+            --main-bg: #f0f2f5;
+            --text-dark: #1e293b;
+            --text-gray: #64748b;
+            --border: #e2e8f0;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Kanit', sans-serif; }
+        body { background-color: var(--main-bg); display: flex; min-height: 100vh; color: var(--text-dark); }
+
+        /* Sidebar - Same as Dashboard */
+        .sidebar {
+            width: 260px; background: var(--sidebar-bg); border-right: 1px solid var(--border);
+            display: flex; flex-direction: column; position: fixed; height: 100vh; padding: 20px; z-index: 100;
+        }
+
+        .brand { display: flex; align-items: center; gap: 12px; padding: 10px; margin-bottom: 30px; color: var(--primary); font-weight: 600; font-size: 1.2rem; }
+        .brand img { width: 35px; height: auto; }
+
+        .nav-menu { flex: 1; }
+        .nav-item {
+            display: flex; align-items: center; gap: 12px; padding: 12px 15px; color: var(--text-gray);
+            text-decoration: none; border-radius: 12px; margin-bottom: 5px; transition: 0.2s;
+        }
+        .nav-item:hover, .nav-item.active { background: #f0f7ff; color: var(--primary); }
+        .logout-btn { color: #ef4444 !important; margin-top: auto; border-top: 1px solid var(--border); padding-top: 20px; cursor: pointer; }
+
+        /* Main Content */
+        .main-content { margin-left: 260px; flex: 1; padding: 40px; }
+        .card { background: #fff; border-radius: 16px; padding: 25px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); border: 1px solid var(--border); margin-bottom: 25px; }
+        .section-title { font-size: 1.1rem; font-weight: 600; margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
+
+        /* Form Styles */
+        .form-group { margin-bottom: 15px; }
+        label { display: block; margin-bottom: 8px; font-size: 0.95rem; color: var(--text-dark); font-weight: 400; }
+        select, input, textarea { 
+            width: 100%; padding: 12px; border: 1px solid var(--border); border-radius: 12px; 
+            font-size: 1rem; transition: 0.2s; outline: none; background: #f8fafc;
+        }
+        select:focus, input:focus, textarea:focus { border-color: var(--primary); background: #fff; box-shadow: 0 0 0 4px rgba(26, 115, 232, 0.1); }
+
+        .btn-submit { 
+            width: 100%; padding: 14px; background: var(--primary); color: #fff; border: none; 
+            border-radius: 12px; font-size: 1rem; cursor: pointer; font-weight: 600; 
+            margin-top: 10px; transition: 0.2s; display: flex; align-items: center; justify-content: center; gap: 8px;
+        }
+        .btn-submit:hover { background: #1557b0; transform: translateY(-1px); }
+
+        /* Appointment Items */
+        .appt-item { 
+            background: #fff; border: 1px solid var(--border); padding: 18px; border-radius: 12px; 
+            margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center; 
+            transition: 0.2s;
+        }
+        .appt-item:hover { border-color: var(--primary); box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+        
+        .status-badge { padding: 6px 14px; border-radius: 20px; font-size: 0.85rem; font-weight: 400; }
+        .status-pending { background: #fef3c7; color: #92400e; }
+        .status-confirmed { background: #dcfce7; color: #166534; }
+    </style>
+</head>
+<body>
+    <aside class="sidebar">
+        <div class="brand">
+            <img src="../../images/wellcare.png" alt="Logo">
+            <span>Wellcare Clinic</span>
+        </div>
+        <nav class="nav-menu">
+            <a href="patient-dashboard.html" class="nav-item"><i class="fas fa-columns"></i> ภาพรวม</a>
+            <a href="appointment.html" class="nav-item active"><i class="fas fa-calendar-alt"></i> นัดหมาย</a>
+            <a href="history.html" class="nav-item"><i class="fas fa-history"></i> ประวัติการรักษา</a>
+        </nav>
+        <div onclick="logout()" class="nav-item logout-btn"><i class="fas fa-sign-out-alt"></i> ออกจากระบบ</div>
+    </aside>
+
+    <main class="main-content">
+        <header style="margin-bottom: 30px;">
+            <h1>นัดหมายของฉัน</h1>
+            <p style="color: var(--text-gray);">จัดการการนัดหมายพบแพทย์ของคุณ</p>
+        </header>
+
+        <div style="display: grid; grid-template-columns: 1.5fr 1fr; gap: 25px; align-items: start;">
+            <div>
+                <div class="card">
+                    <div class="section-title"><i class="fas fa-list-ul" style="color: var(--primary);"></i> รายการนัดหมาย</div>
+                    <div id="appointment_list">
+                        <p style="color: var(--text-gray); text-align: center; padding: 20px;">กำลังโหลดนัดหมาย...</p>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <div class="card">
+                    <div class="section-title"><i class="fas fa-plus-circle" style="color: var(--primary);"></i> จองนัดหมายใหม่</div>
+                    <form id="bookingForm">
+                        <div class="form-group">
+                            <label>เลือกแพทย์</label>
+                            <select id="doctor_select" required>
+                                <option value="">-- กำลังโหลดรายชื่อแพทย์ --</option>
+                            </select>
+                        </div>
+                        <div style="display: grid; grid-template-columns: 1fr; gap: 5px;">
+                            <div class="form-group">
+                                <label>วันที่นัดหมาย</label>
+                                <input type="date" id="app_date" required>
+                            </div>
+                            <div class="form-group">
+                                <label>เวลานัดหมาย</label>
+                                <input type="time" id="app_time" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>เหตุผล/อาการเบื้องต้น</label>
+                            <textarea id="reason" rows="3" placeholder="ระบุอาการเบื้องต้น..."></textarea>
+                        </div>
+                        <button type="submit" class="btn-submit">
+                            <i class="fas fa-paper-plane"></i> ยืนยันการจองนัดหมาย
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="../../js/api.js"></script>
+    <script src="appointment.js"></script>
+</body>
+</html>

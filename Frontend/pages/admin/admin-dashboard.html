@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wellcare Admin - Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root { --sidebar-bg: #1e293b; --accent: #3b82f6; --bg: #f1f5f9; } /* ปรับสี --bg ให้ตรงกัน */
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Kanit', sans-serif; }
+        
+        body { background-color: var(--bg); display: flex; min-height: 100vh; }
+
+        /* Sidebar: ปรับค่า Padding และ Width ให้เท่ากับหน้าอื่นๆ */
+        .sidebar { width: 260px; background: var(--sidebar-bg); color: white; padding: 30px 15px; position: fixed; height: 100vh; }
+        .sidebar h2 { color: var(--accent); margin-bottom: 30px; text-align: center; font-size: 1.5rem; }
+
+        /* Nav Item: ปรับระยะห่างและขนาดตัวอักษรให้ตรงกัน */
+        .nav-item { display: flex; align-items: center; gap: 12px; padding: 14px 15px; color: #94a3b8; text-decoration: none; border-radius: 10px; margin-bottom: 5px; transition: 0.3s; }
+        .nav-item:hover { background: rgba(59, 130, 246, 0.1); color: var(--accent); }
+        .nav-item.active { background: var(--accent); color: white; }
+
+        .main-content { margin-left: 260px; flex-grow: 1; padding: 40px; }
+        
+        /* Stats Grid */
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 25px; margin-bottom: 40px; }
+        .stat-card { background: white; padding: 30px; border-radius: 15px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+        .stat-label { color: #64748b; font-size: 0.95rem; margin-bottom: 10px; }
+        .stat-card h2 { font-size: 2.2rem; color: #0f172a; }
+
+        /* Recent Appt Card */
+        .card { background: white; padding: 25px; border-radius: 15px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+        h1 { margin-bottom: 10px; }
+        h3 { margin-bottom: 25px; color: #0f172a; }
+        
+        #recent-appointments-container { color: #64748b; }
+    </style>
+</head>
+<body>
+    <aside class="sidebar">
+        <h2>Wellcare Admin</h2>
+        <nav>
+            <a href="admin-dashboard.html" class="nav-item active"><i class="fas fa-chart-pie"></i> ภาพรวมระบบ</a>
+            <a href="admin-user.html" class="nav-item"><i class="fas fa-users-cog"></i> จัดการผู้ใช้งาน</a>
+            <a href="admin-doctor.html" class="nav-item"><i class="fas fa-hospital-user"></i> รายชื่อหมอ/พยาบาล</a>
+            <a href="#" onclick="logout()" class="nav-item" style="margin-top: auto; color: #ef4444;"><i class="fas fa-sign-out-alt"></i> ออกจากระบบ</a>
+        </nav>
+    </aside>
+
+    <main class="main-content">
+        <header style="margin-bottom: 35px;">
+            <h1>ระบบบริหารจัดการคลินิก</h1>
+            <p style="color: #64748b;">ภาพรวมสถานะปัจจุบันของ Wellcare Clinic</p>
+        </header>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <p class="stat-label">คนไข้ทั้งหมด</p>
+                <h2 id="total-patients">--</h2>
+            </div>
+            <div class="stat-card">
+                <p class="stat-label">นัดหมายวันนี้</p>
+                <h2 id="today-appointments">--</h2>
+            </div>
+            <div class="stat-card">
+                <p class="stat-label">จำนวนแพทย์</p>
+                <h2 id="total-doctors">--</h2>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3><i class="far fa-calendar-check"></i> รายการนัดหมายล่าสุด</h3>
+            <div id="recent-appointments-container">
+                <p style="text-align: center; padding: 20px;">กำลังรอข้อมูลจากระบบ...</p>
+            </div>
+        </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script src="../../js/api.js"></script> <script src="admin-dashboard.js"></script>
+</body>
+</html>

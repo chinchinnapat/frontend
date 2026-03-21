@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>แก้ไขข้อมูลผู้ใช้งาน - Wellcare Admin</title>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --sidebar-bg: #1e293b;
+            --accent: #3b82f6;
+            --bg: #f1f5f9;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Kanit', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .card {
+            background: white;
+            width: 100%;
+            max-width: 550px;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #1e293b;
+            font-weight: 600;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #64748b;
+            font-size: 0.9rem;
+        }
+
+        .input-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        .input-control:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
+        }
+
+        /* สำหรับช่องที่ห้ามแก้ไข */
+        .input-control[readonly], 
+        .input-control:disabled {
+            background-color: #f8fafc;
+            color: #94a3b8;
+            cursor: not-allowed;
+            border-style: dashed;
+        }
+
+        .btn-group {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .btn-save {
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 14px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: 0.3s;
+        }
+
+        .btn-save:hover {
+            background: #2563eb;
+            transform: translateY(-2px);
+        }
+
+        .btn-cancel {
+            background: #f1f5f9;
+            color: #64748b;
+            border: none;
+            padding: 14px;
+            border-radius: 12px;
+            text-align: center;
+            text-decoration: none;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <h2>แก้ไขข้อมูลผู้ใช้งาน</h2>
+        
+        <form id="editUserForm">
+            <div class="form-group">
+                <label>ชื่อผู้ใช้งาน (Username / Login ID)</label>
+                <input type="text" id="username" class="input-control" readonly>
+            </div>
+
+            <div class="form-group">
+                <label>ตำแหน่ง/สิทธิ์การใช้งาน (แก้ไขไม่ได้)</label>
+                <select id="role" class="input-control" disabled>
+                    <option value="admin">Admin (ผู้ดูแลระบบ)</option>
+                    <option value="doctor">Doctor (แพทย์)</option>
+                    <option value="patient">Patient (คนไข้)</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>เบอร์โทรศัพท์ติดต่อ</label>
+                <input type="tel" id="phone" class="input-control" placeholder="ระบุเบอร์โทรศัพท์">
+            </div>
+
+            <div class="form-group">
+                <label>สถานะบัญชี</label>
+                <select id="status" class="input-control">
+                    <option value="active">ใช้งานปกติ (Active)</option>
+                    <option value="inactive">ระงับการใช้งาน (Inactive)</option>
+                </select>
+            </div>
+
+            <div class="btn-group">
+                <a href="admin-user.html" class="btn-cancel">ยกเลิก</a>
+                <button type="submit" class="btn-save">บันทึกการเปลี่ยนแปลง</button>
+            </div>
+        </form>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+<script src="../../js/api.js"></script> 
+<script src="admin-edit-user.js"></script>
+</body>
+</html>

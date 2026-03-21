@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Appointment Detail - Wellcare Admin</title>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root { --sidebar-bg: #1e293b; --accent: #3b82f6; --bg: #f8fafc; --text-main: #0f172a; --border: #e2e8f0; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Kanit', sans-serif; }
+        body { background-color: var(--bg); display: flex; min-height: 100vh; }
+        .sidebar { width: 260px; background: var(--sidebar-bg); color: white; padding: 40px 20px; position: fixed; height: 100vh; }
+        .main-content { margin-left: 260px; flex-grow: 1; padding: 40px; }
+        .card { background: white; padding: 40px; border-radius: 20px; border: 1px solid var(--border); max-width: 900px; margin: 0 auto; }
+        .info-section { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-bottom: 30px; padding-bottom: 20px; border-bottom: 1px dashed var(--border); }
+        .info-label { color: #64748b; font-size: 0.9rem; margin-bottom: 5px; }
+        .info-value { font-size: 1.1rem; font-weight: 500; color: var(--text-main); }
+        .medical-record { background: #f0f7ff; padding: 25px; border-radius: 15px; border-left: 5px solid var(--accent); }
+    </style>
+</head>
+<body>
+    <aside class="sidebar">
+        <h2 style="color:var(--accent); text-align:center;">Wellcare Admin</h2>
+    </aside>
+    <main class="main-content">
+        <header style="margin-bottom: 30px;">
+            <a href="admin-dashboard.html" style="text-decoration:none; color:var(--accent);"><i class="fas fa-arrow-left"></i> กลับสู่แดชบอร์ด</a>
+            <h1 style="margin-top:15px;">รายละเอียดการตรวจรักษา</h1>
+        </header>
+
+        <div class="card">
+            <div class="info-section">
+                <div>
+                    <div class="info-label">ชื่อคนไข้</div>
+                    <div class="info-value" id="dispPatientName">--</div>
+                </div>
+                <div>
+                    <div class="info-label">แพทย์ผู้รักษา</div>
+                    <div class="info-value" id="dispDoctorName">--</div>
+                </div>
+            </div>
+
+            <div class="info-section">
+                <div>
+                    <div class="info-label">วันที่และเวลา</div>
+                    <div class="info-value"><i class="far fa-calendar-alt"></i> <span id="dispDateTime">--</span></div>
+                </div>
+                <div>
+                    <div class="info-label">ข้อมูลกายภาพ</div>
+                    <div class="info-value" id="dispPhysicalInfo">--</div>
+                </div>
+            </div>
+
+            <div class="medical-record">
+                <h4 style="margin-bottom: 15px; color: var(--accent);"><i class="fas fa-notes-medical"></i> บันทึกการตรวจจากแพทย์</h4>
+                <p><strong>อาการนำ:</strong> <span id="dispSymptoms">--</span></p>
+                <p style="margin-top: 10px;"><strong>ผลการวินิจฉัย:</strong> <span id="dispDiagnosis">--</span></p>
+                <p style="margin-top: 10px;"><strong>แผนการรักษา/ใบสั่งยา:</strong> <span id="dispTreatmentPlan">--</span></p>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

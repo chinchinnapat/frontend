@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <title>Wellcare Admin - Add New Doctor</title>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --accent: #3b82f6;
+            --bg: #f8fafc;
+            --text-main: #1e293b;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Kanit', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg);
+            /* เอา Sidebar ออก จึงจัดให้เนื้อหาอยู่กึ่งกลางหน้าจอ */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 800px;
+        }
+
+        .header-section {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .header-section h1 {
+            color: var(--text-main);
+            font-size: 1.8rem;
+            margin-bottom: 5px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        /* ปรับให้ช่องคำนำหน้าชื่อมีขนาดพอเหมาะ */
+        .full-width { grid-column: span 2; }
+        .prefix-col { grid-column: span 2; }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        label {
+            font-weight: 500;
+            color: #64748b;
+            font-size: 0.95rem;
+        }
+
+        input, select {
+            padding: 12px 15px;
+            border: 1.5px solid #e2e8f0;
+            border-radius: 12px;
+            font-size: 1rem;
+            outline: none;
+            transition: 0.2s;
+        }
+
+        input:focus, select:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
+        }
+
+        .btn-group {
+            display: flex;
+            justify-content: flex-end;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .btn {
+            padding: 12px 25px;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            transition: 0.2s;
+        }
+
+        .btn-cancel {
+            background: #f1f5f9;
+            color: #64748b;
+        }
+
+        .btn-save {
+            background: var(--accent);
+            color: white;
+        }
+
+        .btn:hover {
+            filter: brightness(0.95);
+            transform: translateY(-1px);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="header-section">
+            <h1>เพิ่มข้อมูลแพทย์ใหม่</h1>
+            <p style="color: #64748b;">กรุณาระบุข้อมูลเพื่อสร้างบัญชีแพทย์ในระบบ</p>
+        </div>
+
+        <div class="card">
+            <form id="addDoctorForm">
+                <div class="form-grid">
+                    <div class="form-group prefix-col">
+                        <label>คำนำหน้าชื่อ</label>
+                        <select id="prefix" name="prefix" required>
+                            <option value="" disabled selected>เลือกคำนำหน้าชื่อ</option>
+                            <option value="นพ.">นพ. (นายแพทย์)</option>
+                            <option value="พญ.">พญ. (แพทย์หญิง)</option>
+                            <option value="ดร.">ดร. (ดอกเตอร์)</option>
+                            <option value="ทพ.">ทพ. (ทันตแพทย์)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>ชื่อ (First Name)</label>
+                        <input type="text" id="firstName" placeholder="ระบุชื่อแพทย์" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>นามสกุล (Last Name)</label>
+                        <input type="text" id="lastName" placeholder="ระบุนามสกุล" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>เลขใบอนุญาตประกอบวิชาชีพ</label>
+                        <input type="text" id="licenseId" placeholder="เช่น ว.12345" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>เบอร์โทรศัพท์มือถือ</label>
+                        <input type="tel" id="phone" placeholder="08X-XXX-XXXX" required>
+                    </div>
+                </div>
+
+                <div class="btn-group">
+                    <button type="button" class="btn btn-cancel" onclick="history.back()">ยกเลิก</button>
+                    <button type="submit" class="btn btn-save">บันทึกข้อมูลแพทย์</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="../../js/api.js"></script> 
+    <script src="admin-add-doctor.js"></script>
+</body>
+</html>

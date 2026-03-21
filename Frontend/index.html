@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wellcare Clinic - Home</title>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #1a73e8;
+            --dark-blue: #173c74;
+            --accent: #34a853;
+            --bg-light: #f8fbff;
+            --white: #ffffff;
+            --text-main: #334155;
+            --text-sub: #64748b;
+            --border-color: #e2e8f0;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Kanit', sans-serif; }
+        body { background-color: var(--white); color: var(--text-main); line-height: 1.6; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+
+        /* Navigation */
+        nav { background: var(--white); padding: 15px 0; position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid rgba(0,0,0,0.05); }
+        .nav-wrapper { display: flex; justify-content: space-between; align-items: center; }
+        .logo-box { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+        .logo-large { width: 45px; }
+        .brand-name { font-size: 1.4rem; font-weight: 600; color: var(--dark-blue); }
+        .nav-links { display: flex; align-items: center; gap: 25px; }
+        .nav-item { text-decoration: none; color: var(--text-main); font-weight: 400; transition: 0.3s; }
+        .nav-item:hover, .nav-item.active { color: var(--primary); }
+        .staff-link { background: #f1f5f9; padding: 8px 16px; border-radius: 8px; color: var(--text-sub); font-size: 0.9rem; text-decoration: none; transition: 0.3s; }
+        .staff-link:hover { background: #e2e8f0; color: var(--dark-blue); }
+
+        /* Hero Section - นำ Banner สวยๆ กลับมา */
+        .hero { 
+            position: relative; 
+            padding: 120px 0 160px; 
+            background: #a3c8ff; /* สีสำรองระหว่างโหลดรูป */
+            color: white;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: url('https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80'); /* เปลี่ยนเป็น path รูปของคุณ */
+            background-size: cover;
+            background-position: center;
+            z-index: 0;
+        }
+
+        /* Overlay เพื่อให้ตัวหนังสืออ่านง่ายขึ้น */
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(to right, rgba(159, 202, 234, 0.9), rgba(13, 71, 161, 0.4));
+            z-index: 1;
+        }
+
+        .hero-container { position: relative; z-index: 2; }
+        .tagline { color: #1d3548; font-weight: 600; letter-spacing: 2px; font-size: 0.85rem; display: block; margin-bottom: 15px; }
+        .hero h1 { font-size: 3.5rem; color: white; line-height: 1.2; margin-bottom: 20px; font-weight: 600; }
+        .hero p { font-size: 1.2rem; color: rgba(255,255,255,0.9); margin-bottom: 35px; max-width: 600px; }
+        
+        .hero-btns { display: flex; gap: 15px; }
+        .btn-primary { background: var(--primary); color: white; padding: 14px 28px; border-radius: 10px; text-decoration: none; font-weight: 500; transition: 0.3s; display: inline-flex; align-items: center; gap: 10px; box-shadow: 0 4px 14px rgba(0,0,0,0.2); }
+        .btn-primary:hover { background: white; color: var(--primary); transform: translateY(-2px); }
+        .btn-secondary { background: rgba(255,255,255,0.1); color: white; padding: 14px 28px; border-radius: 10px; text-decoration: none; font-weight: 500; border: 1px solid rgba(255,255,255,0.3); transition: 0.3s; display: inline-flex; align-items: center; gap: 10px; backdrop-filter: blur(5px); }
+        .btn-secondary:hover { background: white; color: var(--dark-blue); }
+
+        /* Stats Bar */
+        .stats-bar { 
+            background: var(--white); 
+            margin-top: -60px; 
+            position: relative; 
+            z-index: 10; 
+            border-radius: 16px; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1); 
+            padding: 35px; 
+            display: grid; 
+            grid-template-columns: repeat(4, 1fr); 
+            gap: 20px; 
+            text-align: center;
+            border: 1px solid rgba(0,0,0,0.03);
+        }
+        .stat-item h3 { font-size: 1.8rem; color: var(--primary); margin-bottom: 5px; }
+        .stat-item p { color: var(--text-sub); font-size: 0.85rem; }
+
+        /* Services Section */
+        .services { padding: 100px 0 80px; background: var(--bg-light); }
+        .section-header { text-align: center; margin-bottom: 50px; }
+        .section-header h2 { font-size: 2.2rem; color: var(--dark-blue); margin-bottom: 15px; }
+        .section-header p { color: var(--text-sub); max-width: 600px; margin: 0 auto; }
+        
+        .services-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+        .service-card { padding: 35px 25px; background: var(--white); border-radius: 20px; transition: 0.3s; border: 1px solid rgba(0,0,0,0.02); text-align: center; }
+        .service-card:hover { transform: translateY(-8px); box-shadow: 0 15px 30px rgba(0,0,0,0.05); border-color: var(--primary); }
+        .service-card i { font-size: 2.5rem; color: var(--primary); margin-bottom: 20px; display: block; }
+        .service-card h3 { margin-bottom: 12px; font-size: 1.2rem; color: var(--dark-blue); }
+        .service-card p { font-size: 0.9rem; color: var(--text-sub); }
+
+        /* Features Section */
+        .features { padding: 100px 0; background: var(--white); }
+        .features-wrapper { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+        .feature-img-placeholder { 
+            background: var(--bg-light); 
+            width: 100%; height: 400px; 
+            border-radius: 24px; 
+            display: flex; align-items: center; justify-content: center;
+            border: 1px solid var(--border-color);
+            overflow: hidden;
+        }
+        .feature-list { list-style: none; margin-top: 25px; }
+        .feature-list li { display: flex; align-items: center; gap: 12px; margin-bottom: 18px; color: var(--text-main); }
+        .feature-list i { color: var(--accent); font-size: 1.2rem; }
+
+        /* Footer */
+        footer { background: #1e293b; color: #f1f5f9; padding: 70px 0 30px; }
+        .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 40px; margin-bottom: 40px; }
+        .footer-logo { font-size: 1.5rem; font-weight: 600; margin-bottom: 15px; display: block; color: var(--white); }
+        .footer-links h4 { margin-bottom: 20px; color: var(--white); font-weight: 500; border-left: 3px solid var(--primary); padding-left: 10px; }
+        .footer-links a { display: block; color: #94a3b8; text-decoration: none; margin-bottom: 12px; transition: 0.2s; font-size: 0.9rem; }
+        .footer-links a:hover { color: var(--white); transform: translateX(5px); }
+        .copyright { text-align: center; padding-top: 30px; border-top: 1px solid rgba(255,255,255,0.05); color: #64748b; font-size: 0.85rem; }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="container nav-wrapper">
+            <a href="index.html" class="logo-box">
+                <img src="/images/wellcare.png" alt="Logo" class="logo-large">
+                <span class="brand-name">Wellcare Clinic</span>
+            </a>
+            <div class="nav-links">
+                <a href="index.html" class="nav-item active">หน้าหลัก</a>
+                <a href="pages/auth/auth.html" class="nav-item">ตารางนัดหมาย</a>
+                <a href="pages/auth/auth.html" class="nav-item">ข้อมูลสุขภาพ</a> 
+                <a href="pages/staff-login/staff-login.html" class="staff-link">สำหรับเจ้าหน้าที่</a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-bg"></div>
+        <div class="container hero-container">
+            <div class="hero-content">
+                <span class="tagline">WELCOME TO WELLCARE CLINIC</span>
+                <h1>Your Health, <br>Our Priority</h1>
+                <p>ดูแลสุขภาพของคุณด้วยความใส่ใจระดับมืออาชีพ พร้อมระบบจัดการนัดหมายออนไลน์ที่รวดเร็วและตรวจสอบประวัติสุขภาพได้ทุกที่ทุกเวลา</p>
+                
+                <div class="hero-btns">
+                    <a href="pages/auth/auth.html" class="btn-primary">
+                        <i class="fas fa-calendar-check"></i> นัดหมายล่วงหน้า
+                    </a>
+                    <a href="pages/auth/auth.html" class="btn-secondary">
+                        <i class="fas fa-file-medical"></i> ข้อมูลสุขภาพ
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <section class="stats-bar">
+            <div class="stat-item">
+                <h3>15,000+</h3>
+                <p>ผู้ใช้บริการที่ไว้วางใจ</p>
+            </div>
+            <div class="stat-item">
+                <h3>24 ชม.</h3>
+                <p>นัดหมายออนไลน์ได้ตลอด</p>
+            </div>
+            <div class="stat-item">
+                <h3>100%</h3>
+                <p>ความปลอดภัยของข้อมูล</p>
+            </div>
+            <div class="stat-item">
+                <h3>มืออาชีพ</h3>
+                <p>ทีมแพทย์เฉพาะทาง</p>
+            </div>
+        </section>
+    </div>
+
+    <section class="services">
+        <div class="container">
+            <div class="section-header">
+                <h2>ศูนย์การรักษาและบริการ</h2>
+                <p>เราพร้อมดูแลคุณด้วยมาตรฐานสากลและเทคโนโลยีการแพทย์ที่ทันสมัย</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <i class="fas fa-user-md"></i>
+                    <h3>General Medicine</h3>
+                    <p>ตรวจสุขภาพเบื้องต้นและให้คำปรึกษาโดยแพทย์ผู้เชี่ยวชาญ</p>
+                </div>
+                <div class="service-card">
+                    <i class="fas fa-heartbeat"></i>
+                    <h3>Heart Center</h3>
+                    <p>ดูแลและป้องกันโรคหัวใจด้วยเครื่องมือที่แม่นยำสูง</p>
+                </div>
+                <div class="service-card">
+                    <i class="fas fa-microscope"></i>
+                    <h3>Lab Diagnostics</h3>
+                    <p>บริการตรวจทางห้องปฏิบัติการที่รวดเร็วและทราบผลผ่านระบบ</p>
+                </div>
+                <div class="service-card">
+                    <i class="fas fa-baby"></i>
+                    <h3>Pediatrics</h3>
+                    <p>ศูนย์ดูแลเด็กเล็กที่ให้ความสำคัญกับพัฒนาการและสุขภาพ</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="features">
+        <div class="container">
+            <div class="features-wrapper">
+                <div>
+                    <h2 style="font-size: 2.2rem; color: var(--dark-blue); font-weight: 600;">นวัตกรรมการดูแลสุขภาพ <br>ที่เข้าถึงง่ายกว่าเดิม</h2>
+                    <p style="margin-top: 20px; color: var(--text-sub);">Wellcare Clinic พัฒนาระบบเพื่อลดขั้นตอนที่ยุ่งยาก ให้คุณมีเวลาใส่ใจสุขภาพมากขึ้น</p>
+                    <ul class="feature-list">
+                        <li><i class="fas fa-check-circle"></i> ระบบจองคิวออนไลน์ ลดการรอคอยหน้าห้องตรวจ</li>
+                        <li><i class="fas fa-check-circle"></i> นัดหมายผ่านระบบล่วงหน้า</li>
+                        <li><i class="fas fa-check-circle"></i> เข้าถึงประวัติการรักษาและใบสั่งยาได้ทันที</li>
+                        <li><i class="fas fa-check-circle"></i> ปรึกษาแพทย์ผ่านระบบนัดหมายที่ทันสมัย</li>
+                    </ul>
+                </div>
+                <div>
+                    <div class="feature-img-placeholder">
+                        <img src="/images/wellcare.png" alt="Wellcare Image" style="width: 150px; opacity: 0.2;">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <span class="footer-logo">Wellcare Clinic</span>
+                    <p style="color: #94a3b8; font-size: 0.9rem; line-height: 1.8;">คลินิกยุคใหม่ที่นำเทคโนโลยีมาใช้เพื่อสุขภาพที่ดีกว่าของคนไทย บริการด้วยหัวใจและมาตรฐานวิชาชีพ</p>
+                </div>
+                <div class="footer-links">
+                    <h4>เมนูหลัก</h4>
+                    <a href="#">หน้าหลัก</a>
+                    <a href="#">จองนัดหมาย</a>
+                    <a href="#">ตรวจสิทธิการรักษา</a>
+                    <a href="#">บทความสุขภาพ</a>
+                </div>
+                <div class="footer-links">
+                    <h4>ติดต่อเรา</h4>
+                    <a href="#"><i class="fas fa-phone-alt"></i> 02-123-4567</a>
+                    <a href="#"><i class="fas fa-map-marker-alt"></i> 123 ถนนสุขุมวิท กรุงเทพฯ 10110</a>
+                    <a href="#"><i class="fas fa-envelope"></i> help@wellcare.com</a>
+                </div>
+            </div>
+            <div class="copyright">
+                © 2026 Wellcare Clinic Management System. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

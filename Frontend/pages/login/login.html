@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Wellcare Clinic</title>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Kanit', sans-serif; }
+        body { background: linear-gradient(135deg, #f0f7ff 0%, #e2eeff 100%); height: 100vh; display: flex; align-items: center; justify-content: center; padding: 20px; }
+        .login-container { background: white; padding: 45px 40px; border-radius: 24px; box-shadow: 0 20px 40px rgba(13, 71, 161, 0.1); width: 100%; max-width: 450px; text-align: center; }
+        .login-header i { font-size: 3.5rem; color: #1a73e8; margin-bottom: 15px; }
+        .login-header h2 { font-size: 1.8rem; color: #0d47a1; margin-bottom: 5px; }
+        .login-header p { color: #64748b; font-size: 0.95rem; margin-bottom: 35px; }
+        .form-group { text-align: left; margin-bottom: 22px; }
+        .form-label { display: block; margin-bottom: 8px; color: #334155; font-size: 0.95rem; font-weight: 500; }
+        .input-control { width: 100%; padding: 14px 18px; border: 2px solid #e2e8f0; border-radius: 12px; font-size: 1rem; transition: all 0.3s ease; background: #f8fafc; }
+        .input-control:focus { outline: none; border-color: #1a73e8; background: white; box-shadow: 0 0 0 4px rgba(26, 115, 232, 0.1); }
+        .btn-login-custom { width: 100%; background: #1a73e8; color: white; border: none; padding: 15px; border-radius: 12px; font-size: 1.1rem; font-weight: 600; cursor: pointer; transition: all 0.3s ease; margin-top: 10px; display: flex; align-items: center; justify-content: center; gap: 10px; }
+        .btn-login-custom:hover { background: #1557b0; transform: translateY(-2px); box-shadow: 0 8px 15px rgba(26, 115, 232, 0.2); }
+        .footer-links { margin-top: 30px; border-top: 1px solid #f1f5f9; padding-top: 25px; }
+        .register-link { color: #64748b; font-size: 0.95rem; }
+        .register-link a { color: #1a73e8; text-decoration: none; font-weight: 600; }
+        .home-link { display: inline-block; margin-top: 20px; color: #94a3b8; text-decoration: none; font-size: 0.85rem; transition: color 0.2s; }
+        .home-link:hover { color: #64748b; }
+    </style>
+</head>
+<body>
+
+    <div class="login-container">
+        <div class="login-header">
+            <i class="fas fa-user-circle"></i>
+            <h2>เข้าสู่ระบบ</h2>
+            <p>Wellcare Clinic Management System</p>
+        </div>
+        
+        <form id="loginForm">
+            <div class="form-group">
+                <label class="form-label">เลขบัตรประจำตัวประชาชน / ชื่อผู้ใช้</label>
+                <input type="text" name="username" id="username" class="input-control" placeholder="ระบุบัญชีผู้ใช้">
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">รหัสผ่าน</label>
+                <input type="password" name="password" id="password" class="input-control" placeholder="ระบุรหัสผ่าน">
+            </div>
+
+            <button type="submit" class="btn-login-custom">
+                <i class="fas fa-sign-in-alt"></i> เข้าสู่ระบบ
+            </button>
+        </form>
+
+        <div class="footer-links">
+            <p class="register-link">
+                ยังไม่มีบัญชีผู้ใช้งาน? <a href="/pages/register/register.html">สมัครสมาชิก</a>
+            </p>
+            <a href="../../index.html" class="home-link"><i class="fas fa-arrow-left"></i> กลับหน้าหลัก</a>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="/js/api.js"></script>
+    <script src="login.js"></script>
+</body>
+</html>

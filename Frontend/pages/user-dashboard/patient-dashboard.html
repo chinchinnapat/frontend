@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>แดชบอร์ดคนไข้ - Wellcare Clinic</title>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #1a73e8;
+            --sidebar-bg: #ffffff;
+            --main-bg: #f0f2f5;
+            --text-dark: #1e293b;
+            --text-gray: #64748b;
+            --border: #e2e8f0;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Kanit', sans-serif; }
+        body { background-color: var(--main-bg); display: flex; min-height: 100vh; color: var(--text-dark); }
+
+        .sidebar {
+            width: 260px; background: var(--sidebar-bg); border-right: 1px solid var(--border);
+            display: flex; flex-direction: column; position: fixed; height: 100vh; padding: 20px; z-index: 100;
+        }
+
+        .brand { display: flex; align-items: center; gap: 12px; padding: 10px; margin-bottom: 30px; color: var(--primary); font-weight: 600; font-size: 1.2rem; }
+        .brand img { width: 35px; height: auto; }
+
+        .nav-menu { flex: 1; }
+        .nav-item {
+            display: flex; align-items: center; gap: 12px; padding: 12px 15px; color: var(--text-gray);
+            text-decoration: none; border-radius: 12px; margin-bottom: 5px; transition: 0.2s;
+        }
+        .nav-item:hover, .nav-item.active { background: #f0f7ff; color: var(--primary); }
+        .logout-btn { color: #ef4444 !important; margin-top: auto; border-top: 1px solid var(--border); padding-top: 20px; cursor: pointer; }
+
+        .main-content { margin-left: 260px; flex: 1; padding: 40px; }
+        .card { background: #fff; border-radius: 16px; padding: 25px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); border: 1px solid var(--border); margin-bottom: 25px; }
+        .section-title { font-size: 1.1rem; font-weight: 600; margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
+
+        .profile-info p { margin-bottom: 10px; font-size: 0.95rem; }
+        .profile-info strong { color: var(--text-gray); width: 85px; display: inline-block; }
+
+        .btn-action { width: 100%; padding: 10px; border-radius: 10px; border: none; cursor: pointer; margin-top: 10px; display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 0.9rem; transition: 0.2s; }
+        .btn-edit { background: #eef2ff; color: #4f46e5; }
+        
+        .btn-cancel-appt { background: #fff1f2; color: #e11d48; border: 1px solid #ffe4e6; padding: 6px 12px; border-radius: 8px; cursor: pointer; font-size: 0.85rem; }
+        .btn-cancel-appt:hover { background: #ffe4e6; }
+
+        .history-item { background: #fff; border: 1px solid var(--border); padding: 15px; border-radius: 12px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; }
+    </style>
+</head>
+<body>
+    <aside class="sidebar">
+        <div class="brand">
+            <img src="../../images/wellcare.png" alt="Logo">
+            <span>Wellcare Clinic</span>
+        </div>
+        <nav class="nav-menu">
+            <a href="patient-dashboard.html" class="nav-item active"><i class="fas fa-columns"></i> ภาพรวม</a>
+            <a href="appointment.html" class="nav-item"><i class="fas fa-calendar-alt"></i> นัดหมาย</a>
+            <a href="history.html" class="nav-item"><i class="fas fa-history"></i> ประวัติการรักษา</a>
+        </nav>
+        <div onclick="logout()" class="nav-item logout-btn"><i class="fas fa-sign-out-alt"></i> ออกจากระบบ</div>
+    </aside>
+
+    <main class="main-content">
+        <header style="margin-bottom: 30px;">
+            <h1 id="user_display_name">สวัสดี...</h1>
+            <p style="color: var(--text-gray);">ยินดีต้อนรับสู่ระบบจัดการสุขภาพของคุณ</p>
+        </header>
+
+        <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 25px;">
+            <div>
+                <div class="card">
+                    <div class="section-title"><i class="far fa-calendar-check" style="color: var(--primary);"></i> นัดหมายที่กำลังจะถึง</div>
+                    <div id="next_appointment_box">
+                        <p style="color: var(--text-gray);">กำลังโหลด...</p>
+                    </div>
+                </div>
+
+                <div id="visit_history_box">
+                </div>
+            </div>
+
+            <div>
+                <div class="card">
+                    <div class="section-title"><i class="far fa-user-circle"></i> ข้อมูลส่วนตัว</div>
+                    <div class="profile-info">
+                        <p><strong>เบอร์โทร:</strong> <span id="profile_phone">--</span></p>
+                        <p><strong>เลขบัตร:</strong> <span id="profile_id">--</span></p>
+                        <p><strong>ที่อยู่:</strong> <span id="profile_address">--</span></p>
+                        <hr style="margin: 15px 0; border: 0; border-top: 1px solid var(--border);">
+                        <p style="color: #ef4444;"><strong>ประวัติแพ้ยา:</strong> <br><span id="profile_allergy">--</span></p>
+                    </div>
+                    <button class="btn-action btn-edit" onclick="openEditProfile()"><i class="far fa-edit"></i> แก้ไขข้อมูล</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    
+    <script src="../../js/api.js"></script> 
+    
+    <script src="patient-dashboard.js"></script>
+</body>
+</html>
